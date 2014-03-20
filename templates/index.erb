@@ -1,0 +1,19 @@
+<h2>Photo gallery</h2>
+
+<div id="photo-form">
+
+  <form action="/upload" method="post" enctype="multipart/form-data">
+      <input type="file" name="file">
+       <input type="text" name="description">
+      <input type="submit" value="Upload image">
+  </form>
+</div>
+<ol class="photo-list">
+  <% photos.each do |photo| %>
+    <li>
+      <img src="/uploads/<%= photo.filename %>">
+      <p><%= photo.description %> </p> 
+
+    </li>
+  <% end %>
+</ol>
