@@ -7,13 +7,18 @@
        <input type="text" name="description">
       <input type="submit" value="Upload image">
   </form>
+  
 </div>
+
 <ol class="photo-list">
   <% photos.each do |photo| %>
     <li>
       <img src="/uploads/<%= photo.filename %>">
-      <p><%= photo.description %> </p> 
-
+      <p><%= photo.description %> </p>
+      <form action="delete/<%photo.filename%>/edit" method="photos">
+        <input type="submit" value= "delete">
+      </form>
     </li>
   <% end %>
 </ol>
+ 

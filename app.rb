@@ -14,6 +14,11 @@ get '/todo' do
   erb :todo
 end
 
+post '/delete' do 
+  photos = Photo.where(:id=>params[:id].first)
+  photos.delete
+  redirect to('/')
+end
 
 
 post '/upload' do
