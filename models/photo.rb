@@ -1,4 +1,3 @@
 class Photo < Sequel::Model(:photos)
-  # Remember to create a migration!
-  # rake generate:migration NAME=create_photos
+  one_to_many :comments
 end

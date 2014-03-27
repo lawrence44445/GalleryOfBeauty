@@ -56,3 +56,8 @@ post '/upload' do
 	
   redirect to('/')
 end
+
+post '/photos/:id/comments' do
+  Comment.create(:photo_id =>params[:id], :contents => params[:contents])
+  redirect to('/')
+end
