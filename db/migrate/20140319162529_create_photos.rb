@@ -6,7 +6,9 @@ Sequel.migration do
       string :filename, :null => false
       datetime :created_at, :null => false
       datetime :updated_at, :null => false
+      #description of the image
       string :description
+      string :title
     end
   end
 end

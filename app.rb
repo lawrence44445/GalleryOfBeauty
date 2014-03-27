@@ -13,18 +13,22 @@ end
 get '/todo' do
   erb :todo
 end
+#deletes the post
+post '/photos/:id/delete' do 
+  photo = Photo.where(:id=>params[:id]).first
+  photo.delete
 
-post '/delete' do 
-  photos = Photo.where(:id=>params[:id].first)
-  photos.delete
+  File.unlink("./public/uploads/#{photo.filename}")
+
   redirect to('/')
 end
 
-
+#uploads a picture and description.
 post '/upload' do
   filename = params[:file][:filename]
   file = params[:file][:tempfile]
   description = params[:description]
+  title = params[:title]
   
   # here:
   # change filename in some way to guarantee
@@ -48,7 +52,7 @@ post '/upload' do
     f.write(file.read)
   end
 
-  Photo.create(:filename => filename, :description => description)
+  Photo.create(:filename => filename, :description => description, :title=>title)
 	
   redirect to('/')
 end

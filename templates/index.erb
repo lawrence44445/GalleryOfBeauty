@@ -3,8 +3,9 @@
 <div id="photo-form">
 
   <form action="/upload" method="post" enctype="multipart/form-data">
+      <input type="text" name="title">
       <input type="file" name="file">
-       <input type="text" name="description">
+      <input type="text" name="description">
       <input type="submit" value="Upload image">
   </form>
   
@@ -13,9 +14,10 @@
 <ol class="photo-list">
   <% photos.each do |photo| %>
     <li>
+      <p>Title:  <%= photo.title %> </p>
       <img src="/uploads/<%= photo.filename %>">
       <p><%= photo.description %> </p>
-      <form action="delete/<%photo.filename%>/edit" method="photos">
+      <form action="/photos/<%= photo.id %>/delete" method="post">
         <input type="submit" value= "delete">
       </form>
     </li>
