@@ -10,10 +10,17 @@ get '/' do
   erb :index, :locals => {:photos => photos}
 end
 
-get '/todo' do
-  erb :todo
+get '/profile' do
+  photos = Photo.reverse_order(:created_at).all
+  erb :index, :locals => {:photos => photos}
 end
-#deletes the post
+
+get '/gallery' do
+  photos = Photo.reverse_order(:created_at).all
+  erb :index, :locals => {:photos => photos}
+end
+
+  #deletes the photo object and child objects
 post '/photos/:id/delete' do 
   photo = Photo.where(:id=>params[:id]).first
   photo.delete
@@ -23,6 +30,14 @@ post '/photos/:id/delete' do
   redirect to('/')
 end
 
+#deletes the comment of a photo
+post '/comments/:id/delete' do
+  comment = Comment.where(:id=>params[:id]).first
+  comment.delete
+  redirect to('/')
+end
+
+
 #uploads a picture and description.
 post '/upload' do
   filename = params[:file][:filename]
@@ -30,14 +45,16 @@ post '/upload' do
   description = params[:description]
   title = params[:title]
   
+
+
   # here:
   # change filename in some way to guarantee
   # that it doesn't collide with any
   # previously-uploaded filenames
 
   # Either of these will (reasonably) make
-  # sure that we don't accidentally overwrite
-  # old files
+  # sure that we don't accidentally old
+  # overwrite files
 
   # filename = (some random gibberish) + filename
   # filename = "#{SecureRandom.hex(3)}_#{filename}"

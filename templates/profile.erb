@@ -1,4 +1,4 @@
-<h2>Photo gallery</h2>
+<h2>My Profile</h2>
 
 <div id="photo-form">
 
@@ -31,7 +31,7 @@
         <% photo.comments.each do |comment| %>
           <li>
             <p><%= comment.contents %>
-            <a style="margin-left:100px">--- <%= photo.created_at.strftime('%A, %B %-d, %Y') %></a>
+            <a style="margin-left:100px"> <%= photo.created_at.strftime('%A, %B %-d, %Y') %></a>
             </p>
             <form action="/comments/<%= comment.id %>/delete" method="post">
               <input type="submit" value= "delete">
