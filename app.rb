@@ -40,38 +40,42 @@ end
 
 #uploads a picture and description.
 post '/upload' do
-  filename = params[:file][:filename]
-  file = params[:file][:tempfile]
-  description = params[:description]
-  title = params[:title]
-  
+  if (params[:file].to_s.length>0)
+    filename = params[:file][:filename]
+    file = params[:file][:tempfile]
+    description = params[:description]
+    title = params[:title]
+    
 
 
-  # here:
-  # change filename in some way to guarantee
-  # that it doesn't collide with any
-  # previously-uploaded filenames
+    # here:
+    # change filename in some way to guarantee
+    # that it doesn't collide with any
+    # previously-uploaded filenames
 
-  # Either of these will (reasonably) make
-  # sure that we don't accidentally old
-  # overwrite files
+    # Either of these will (reasonably) make
+    # sure that we don't accidentally old
+    # overwrite files
 
-  # filename = (some random gibberish) + filename
-  # filename = "#{SecureRandom.hex(3)}_#{filename}"
+    # filename = (some random gibberish) + filename
+    # filename = "#{SecureRandom.hex(3)}_#{filename}"
 
-  # filename = (the current time to the second) + filename
-  # filename = "#{Time.now.to_i}_#{filename}"
+    # filename = (the current time to the second) + filename
+    # filename = "#{Time.now.to_i}_#{filename}"
 
-  # Both
-  filename = "#{Time.now.to_i}_#{SecureRandom.hex(3)}_#{filename}"
+    # Both
+    filename = "#{Time.now.to_i}_#{SecureRandom.hex(3)}_#{filename}"
 
-  File.open("./public/uploads/#{filename}", 'wb') do |f|
-    f.write(file.read)
+    File.open("./public/uploads/#{filename}", 'wb') do |f|
+      f.write(file.read)
+    end
+
+    Photo.create(:filename => filename, :description => description, :title=>title)
+
   end
-
-  Photo.create(:filename => filename, :description => description, :title=>title)
-	
+    
   redirect to('/')
+
 end
 
 post '/photos/:id/comments' do
