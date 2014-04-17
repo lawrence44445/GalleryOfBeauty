@@ -1,4 +1,5 @@
-<h2>Photo gallery</h2>
+<h2 id="gallery">3D Cube <span> Gallery </span>
+    </h2> 
 
 
 <div id="top" class="top">
@@ -13,9 +14,9 @@
 <% photos.each do |photo| %>
 <form action="/photos/<%= photo.id %>/delete" method="post">
         <input type="submit" value= "delete">
-      </form>
-      <h1>Title:  <%= photo.title %> </h1> 
-      <p><%= photo.created_at.strftime('%A, %B %-d, %Y') %></p>
+</form>
+<h1>Title:  <%= photo.title %> </h1> 
+<p><%= photo.created_at.strftime('%A, %B %-d, %Y') %></p>
 
 
 
@@ -24,26 +25,25 @@
 <div id="experiment">
   <div id="cube">
     <div class="face one">
-      <img src="/uploads/<%= photo.filename %>"></img>
+      <img class = "images"src="/uploads/<%= photo.filename %>"></img>
     </div>
     <div class="face two">
-      <img src="/uploads/<%= photo.filename %>"></img>
+      <img class = "images"src="/uploads/<%= photo.filename %>"></img>
     </div>
     <div class="face three">
-      <img src="/uploads/<%= photo.filename %>"></img>
+      <img class = "images"src="/uploads/<%= photo.filename %>"></img>
     </div>
     <div class="face four">
-      <img src="/uploads/<%= photo.filename %>"></img>
+      <img class = "images"src="/uploads/<%= photo.filename %>"></img>
     </div>
     <div class="face five">
-      <img src="http://www.jonathanphotos.com/Pictures/Asia%20web/China/Shanghai/Dali%20Clock%20in%20Downtown%20Shanghai%20web%201000%20n%2072.jpg" alt=""></img>
+      <img class = "images"src="/uploads/<%= photo.filename %>"></img>
     </div>
     <div class="face six">
-      <img src="http://blog.art.com/wp-content/uploads/2013/10/salvador-dali-the-city-of-the-drawers_i-G-8-817-OBFY000Z.jpg" alt=""></img>
+      <img class = "images"src="/uploads/<%= photo.filename %>"></img>
     </div>
   </div>
 </div>
-
 
  <% end %>
 
